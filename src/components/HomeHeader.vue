@@ -2,7 +2,7 @@
   import SearchBar from '@/components/SearchBar.vue'
   import { defineComponent, ref, onMounted } from '@vue/runtime-core'
   import SearchIcon from './icons/SearchIcon.vue'
-
+  import { useSearchStore } from '../stores/search'
   export default defineComponent({
     components: {
       SearchBar,
@@ -11,26 +11,28 @@
 
     setup() {
       const searchTranslation = 'بحث'
-      const show = ref(false)
+      const search = useSearchStore()
 
-      function showSearchModal() {
+      function openSearchModal() {
         setTimeout(() => {
-          show.value = true
+          search.openSearch()
         }, 100)
       }
 
       onMounted(() => {
         window.addEventListener('keydown', (e) => {
-          if (e.keyCode == 75 || e.ctrlKey) {
-            showSearchModal()
+          e.preventDefault()
+          if (e.keyCode == 75 && e.ctrlKey) {
+            if (search.showSearchModal) search.closeSearch()
+            else openSearchModal()
           }
         })
       })
 
       return {
         searchTranslation,
-        show,
-        showSearchModal
+        search,
+        openSearchModal
       }
     }
   })
@@ -62,12 +64,12 @@
       </svg>
     </div>
     <transition name="slide-fade">
-      <search-bar @close-modal="show = false" v-if="show" />
+      <search-bar v-if="search.showSearchModal" />
     </transition>
 
     <div class="sm:max-w-full md:max-w-xl lg:max-w-2xl mx-auto my-8">
       <div class="mt-1 relative mx-2 sm:mx-0">
-        <div :class="show ? 'opacity-20' : 'opacity-100'">
+        <div :class="search.showSearchModal ? 'opacity-20' : 'opacity-100'">
           <div class="mt-1 relative rounded-md shadow-sm">
             <div
               class="absolute inset-y-0 left-0 grid place-content-center pt-1 ml-3 rounded-full cursor-pointer text-gray-600"
@@ -75,7 +77,7 @@
               <search-icon />
             </div>
             <input
-              @focus="showSearchModal()"
+              @focus="openSearchModal()"
               type="text"
               class="block w-full text-md text-gray-900 dark:bg-gray-700 border border-gray-300 dark:border-gray-500 rounded-full shadow-sm pr-3 pl-10 py-3 focus:outline-none"
               :placeholder="searchTranslation + '...'"

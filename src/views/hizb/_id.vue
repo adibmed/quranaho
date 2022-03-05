@@ -20,7 +20,6 @@
       const router = useRouter()
 
       const id = route.params.id
-      console.log('🔥 🔥 🔥 🔥 ')
       quran.fetchHizb(id)
 
       function changeChapter(chapterNumber: number) {

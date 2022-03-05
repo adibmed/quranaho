@@ -9,7 +9,6 @@ export const useQuranStore = defineStore({
     isLoading: false,
     reciter: 0,
     currentPlayingChapter: 0,
-    chapters: [],
     verses: [],
     chapterNumber: 1,
     hizbNumber: 1,
@@ -28,7 +27,7 @@ export const useQuranStore = defineStore({
     async fetchAllChapters() {
       this.isLoading = true
       await axios.get('https://api.quran.com/api/v4/chapters?language=en').then((response) => {
-        this.chapters = response.data.chapters
+        this.chaptersList = response.data.chapters
       })
       this.isLoading = false
     },
