@@ -37,7 +37,9 @@
       }
 
       function changeHizb(hizbNumber: number) {
+        closeAllMenus()
         quran.fetchHizb(hizbNumber)
+        router.push({ name: 'Hizb', params: { id: hizbNumber } })
       }
 
       function closeAllMenus() {
@@ -71,7 +73,7 @@
           @click="showChaptersDropdown = !showChaptersDropdown"
           class="py-2 w-full border-2 dark:border-white dark:border-opacity-40 text-gray-700 dark:text-gray-300 hover:border-green-400 dark:hover:border-green-400 hover:bg-gray-100 dark:hover:bg-gray-700 delay-75 rounded"
         >
-          {{ quran.currentChapter.name_arabic }}
+          {{ quran.currentChapter?.name_arabic }}
         </button>
         <ul
           id="list"
@@ -105,7 +107,7 @@
         >
           <p class="text-md font-normal ml-3 block truncate">
             <span>{{ translatedWords.hizb }}</span>
-            <span class="mx-1">{{ hizbNumber }}</span>
+            <span class="mx-1">{{ quran.hizbNumber }}</span>
           </p>
         </button>
         <ul

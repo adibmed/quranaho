@@ -57,6 +57,7 @@ export const useQuranStore = defineStore({
      * @param hizbNumber
      */
     async fetchHizb(hizbNumber: number) {
+      this.hizbNumber = hizbNumber
       await axios
         .get(`https://api.quran.com/api/v4/quran/verses/qpc_nastaleeq?hizb_number=${hizbNumber}`)
         .then((response) => {

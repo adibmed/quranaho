@@ -3,7 +3,8 @@
   import ChapterHeader from '@/components/ChapterHeader.vue'
   import Loading from '@/components/Loading.vue'
   import { defineComponent } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { useRoute, useRouter } from 'vue-router'
+
   import { useQuranStore } from '@/stores/quran'
 
   export default defineComponent({
@@ -16,12 +17,26 @@
     setup() {
       const quran = useQuranStore()
       const route = useRoute()
+      const router = useRouter()
 
       const id = route.params.id
-      quran.fetchChapter(id)
+      console.log('🔥 🔥 🔥 🔥 ')
+      quran.fetchHizb(id)
+
+      function changeChapter(chapterNumber: number) {
+        console.log(chapterNumber)
+        router.push({ name: 'Chapter', params: { id: chapterNumber } })
+        quran.fetchChapter(chapterNumber)
+      }
+
+      function changeHizb(hizbNumber: number) {
+        quran.fetchHizb(hizbNumber)
+      }
 
       return {
-        quran
+        quran,
+        changeChapter,
+        changeHizb
       }
     }
   })
@@ -29,7 +44,7 @@
 
 <template>
   <div class="chapter w-full">
-    <chapter-header />
+    <chapter-header v-on:changeChapter="changeChapter" v-on:changeHizb="changeHizb" />
     <div class="container mx-auto">
       <chapter-text
         v-if="!quran.isLoading"
