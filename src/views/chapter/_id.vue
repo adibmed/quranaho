@@ -51,7 +51,6 @@
       <chapter-text
         v-if="!quran.isLoading"
         :chapterNumber="quran.chapterNumber"
-        :startingVerse="quran.startingVerse"
         :verses="quran.verses"
       />
       <Loading v-else />

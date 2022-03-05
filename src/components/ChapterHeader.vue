@@ -64,7 +64,7 @@
 
 <template>
   <div v-if="quran.chaptersLoaded && quran.recitersLoaded" class="px-2 sm:px-0 w-full">
-    <div class="container sm:mx-auto lg:max-w-xl py-4 sm:flex">
+    <div class="container sm:mx-auto lg:max-w-2xl py-4 sm:flex">
       <!-- Chapters dropdown  -->
       <div class="flex-1 mt-2 sm:pt-0">
         <button

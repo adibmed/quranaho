@@ -11,15 +11,13 @@ export const useQuranStore = defineStore({
     currentPlayingChapter: 0,
     chapters: [],
     verses: [],
-    startingVerse: '',
     chapterNumber: 1,
     hizbNumber: 1,
     chaptersList: [],
     reciters: [],
-    currentChapter: {},
+    currentChapter: null,
     chaptersLoaded: false,
-    recitersLoaded: false,
-    currentChapterName: ''
+    recitersLoaded: false
   }),
   getters: {},
 
@@ -41,8 +39,8 @@ export const useQuranStore = defineStore({
      * @param id
      */
     async fetchChapter(id: number) {
-      // this.isLoading = true
-      this.fetchStartingVerse()
+      this.isLoading = true
+      this.currentChapter = this.chaptersList.find((chapter) => chapter.id === id)
       await axios
         .get(`https://api.quran.com/api/v4/quran/verses/qpc_nastaleeq?chapter_number=${id}`)
         .then((response) => {
@@ -59,8 +57,6 @@ export const useQuranStore = defineStore({
      * @param hizbNumber
      */
     async fetchHizb(hizbNumber: number) {
-      // this.isLoading = true
-      this.fetchStartingVerse()
       await axios
         .get(`https://api.quran.com/api/v4/quran/verses/qpc_nastaleeq?hizb_number=${hizbNumber}`)
         .then((response) => {
@@ -69,21 +65,6 @@ export const useQuranStore = defineStore({
       setTimeout(() => {
         this.isLoading = false
       }, 1000)
-    },
-
-    /**
-     * Fetch the starting verse
-     *
-     */
-    async fetchStartingVerse() {
-      this.isLoading = true
-      const id = 1
-      await axios
-        .get(`https://api.quran.com/api/v4/quran/verses/qpc_nastaleeq?chapter_number=${id}`)
-        .then((response) => {
-          this.startingVerse = response.data.verses[0].text_qpc_nastaleeq
-        })
-      // this.isLoading = false
     },
 
     /**
@@ -107,7 +88,6 @@ export const useQuranStore = defineStore({
         this.chaptersList = response.data.chapters
         this.chaptersLoaded = true
         this.currentChapter = this.chaptersList[0]
-        this.currentChapterName = response.data.chapters[this.chapterNumber - 1].name_arabic
       })
     },
 
