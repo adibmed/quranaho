@@ -11,8 +11,8 @@
     },
     props: {
       chapterNumber: {
-        default: 0,
-        type: Number
+        type: Number,
+        default: 0
       },
       verses: {
         default: () => [],
@@ -22,8 +22,6 @@
 
     setup() {
       const quran = useQuranStore()
-      quran.fetchchaptersInfo()
-
       const chapterTranslation = 'سورة'
 
       return {
@@ -36,14 +34,14 @@
 
 <template>
   <div
-    id="text"
     class="dark:text-white leading-normal text-justify pt-4 min-h-screen lg:max-w-2xl sm:mx-auto pb-16 mx-3"
   >
     <p
+      v-if="!quran.isLoadingChapters"
       class="arabic p-2 text-2xl text-center border-2 dark:text-gray-300 border-green-400 dark:border-green-400 bg-gray-100 dark:bg-gray-700 rounded"
     >
       <span class="px-1">{{ chapterTranslation }}</span>
-      <span class="px-1">{{ quran.currentChapterName }}</span>
+      <span class="px-1">{{ quran.currentChapter.name_arabic }}</span>
     </p>
 
     <div
@@ -64,5 +62,3 @@
     </div>
   </div>
 </template>
-
-<style></style>

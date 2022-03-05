@@ -7,6 +7,7 @@
     setup() {
       const quran = useQuranStore()
       const router = useRouter()
+
       const showRecitersDropdown = ref(false)
       const showChaptersDropdown = ref(false)
       const showHizbsDropdown = ref(false)
@@ -22,7 +23,8 @@
         return showChaptersDropdown.value || showHizbsDropdown.value || showRecitersDropdown.value
       })
 
-      quran.fetchchaptersInfo()
+      console.log('🔥 ')
+      quran.fetchAllChapters()
       quran.fetchReciters()
 
       function changeReciter(reciterNumber: number) {
@@ -65,15 +67,15 @@
 </script>
 
 <template>
-  <div v-if="quran.chaptersLoaded && quran.recitersLoaded" class="px-2 sm:px-0 w-full">
+  <div class="px-2 sm:px-0 w-full">
     <div class="container sm:mx-auto lg:max-w-2xl py-4 sm:flex">
       <!-- Chapters dropdown  -->
-      <div class="flex-1 mt-2 sm:pt-0">
+      <div class="flex-1 mt-2 sm:pt-0" v-if="!quran.isLoadingChapters">
         <button
           @click="showChaptersDropdown = !showChaptersDropdown"
           class="py-2 w-full border-2 dark:border-white dark:border-opacity-40 text-gray-700 dark:text-gray-300 hover:border-green-400 dark:hover:border-green-400 hover:bg-gray-100 dark:hover:bg-gray-700 delay-75 rounded"
         >
-          {{ quran.currentChapter?.name_arabic }}
+          {{ quran.currentChapter.name_arabic }}
         </button>
         <ul
           id="list"
@@ -85,16 +87,16 @@
           aria-activedescendant="listbox-option-3"
         >
           <li
-            v-for="chapter in quran.chaptersList"
+            v-for="chapter in quran.chapters"
             :key="chapter.id"
             class="hover:border-green-400 dark:hover:border-green-400 hover:bg-gray-100 dark:hover:bg-gray-700 py-1 relative cursor-pointer border-b-2 px-2"
             id="listbox-option-0"
             role="option"
             @click="changeChapter(chapter.id)"
           >
-            <span class="text-md my-1 font-normal ml-3 block truncate">{{
-              chapter.name_arabic
-            }}</span>
+            <span class="text-md my-1 font-normal ml-3 block truncate">
+              {{ chapter.name_arabic }}
+            </span>
           </li>
         </ul>
       </div>
@@ -136,12 +138,12 @@
       </div>
 
       <!-- Reciters dropdown  -->
-      <div class="flex-1 mt-2 sm:pt-0">
+      <div class="flex-1 mt-2 sm:pt-0" v-if="!quran.isLoadingReciters">
         <button
           @click="showRecitersDropdown = !showRecitersDropdown"
           class="py-2 w-full border-2 dark:border-white dark:border-opacity-40 text-gray-700 dark:text-gray-300 hover:border-green-400 dark:hover:border-green-400 hover:bg-gray-100 dark:hover:bg-gray-700 delay-75 rounded"
         >
-          {{ quran.reciter.translated_name.name }}
+          {{ quran.currentReciter.translated_name.name }}
         </button>
         <ul
           id="list"
@@ -160,9 +162,9 @@
             role="option"
             @click="changeReciter(reciter.id)"
           >
-            <span class="text-md my-1 font-normal ml-3 block truncate">{{
-              reciter.translated_name.name
-            }}</span>
+            <span class="text-md my-1 font-normal ml-3 block truncate">
+              {{ reciter.translated_name.name }}
+            </span>
           </li>
         </ul>
       </div>

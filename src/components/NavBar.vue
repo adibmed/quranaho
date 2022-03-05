@@ -20,9 +20,14 @@
         title: 'القرآن الكريم'
       }
 
+      function toggle() {
+        isHidden.value = true
+      }
+
       return {
         isHidden,
-        translatedWords
+        translatedWords,
+        toggle
       }
     }
   })
@@ -33,7 +38,7 @@
     <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-4">
       <div class="relative flex items-center justify-between h-16">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-          <nav-bar-menu-toggler @click="isHidden = !isHidden" :is-hidden="isHidden" />
+          <nav-bar-menu-toggler @click="toggle" :is-hidden="isHidden" />
         </div>
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-center">

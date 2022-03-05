@@ -17,7 +17,7 @@
       const quran = useQuranStore()
       const route = useRoute()
 
-      const id = route.params.id
+      const id = Number(route.params.id)
       quran.fetchChapter(id)
 
       return {
@@ -32,11 +32,10 @@
     <chapter-header />
     <div class="container mx-auto">
       <chapter-text
-        v-if="!quran.isLoading"
+        v-if="!quran.isLoadingChapter"
         :chapterNumber="quran.chapterNumber"
         :verses="quran.verses"
       />
-      <Loading v-else />
     </div>
   </div>
 </template>

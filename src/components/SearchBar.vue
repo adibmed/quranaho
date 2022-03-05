@@ -1,7 +1,6 @@
 <script lang="ts">
   import SearchDropdown from '@/components/SearchDropdown.vue'
   import SearchIcon from '@/components/icons/SearchIcon.vue'
-  import axios from 'axios'
   import { defineComponent } from 'vue'
   import CloseIcon from './icons/CloseIcon.vue'
   import { useSearchStore } from '../stores/search'
@@ -21,63 +20,31 @@
         nothingFoundMessage: 'لم يتم العثور على أي نتائج'
       }
 
+      function onInput(event: Event) {
+        // disable body scrolling when search is open
+        document.body.style.overflow = 'hidden'
+        const query = (event.target as HTMLInputElement).value
+        search.search(query)
+      }
+
       function closeSearchModal(): void {
         search.closeSearch()
+        search.$reset()
         document.body.style.overflow = 'initial'
       }
 
       function loadMore() {
         search.loadMore()
       }
+
       return {
         search,
         closeSearchModal,
         translatedWords,
-        loadMore
+        loadMore,
+        onInput
       }
     }
-    // data() {
-    //   return {
-    //     searchResults: [],
-    //     searchResultsLoaded: false,
-    //     currentPage: 0,
-    //     searchQuery: '',
-    //     totalPages: 0,
-    //     remainingResults: 0,
-    //     isInputActive: false
-    //   }
-    // }
-
-    // methods: {
-    // search(event: Event) {
-    //   // disable body scrolling when search is open
-    //   document.body.style.overflow = 'hidden'
-    //   this.searchQuery = (event.target as HTMLInputElement).value
-    //   this.isInputActive = true
-    //   this.loadResults()
-    // },
-    // async loadResults() {
-    //   if (this.isInputActive) this.searchResults = []
-    //   if (this.searchQuery.length > 0) {
-    //     setTimeout(async () => {
-    //       await axios
-    //         .get(
-    //           `https://api.quran.com/api/v4/search?q=${this.searchQuery}&size=20&page=${this.currentPage}&language=en`
-    //         )
-    //         .then((response) => {
-    //           this.searchResults = this.searchResults.concat(response.data.search.results)
-    //           this.searchResultsLoaded = true
-    //           this.remainingResults =
-    //             response.data.search.total_results - this.searchResults.length
-    //           this.totalPages = response.data.search.total_pages
-    //         })
-    //         .catch((error) => {
-    //           console.log(error)
-    //         })
-    //     }, 50)
-    //   }
-    // },
-    // }
   })
 </script>
 
@@ -104,7 +71,7 @@
             <search-icon />
           </div>
           <input
-            @input="search"
+            @input="onInput"
             type="text"
             class="block w-full text-md text-gray-900 dark:bg-gray-700 border border-gray-300 dark:border-gray-500 rounded-full shadow-sm pr-3 pl-10 py-3 focus:outline-none focus:ring-1 focus:ring-green-400 dark:text-gray-100 focus:border-green-400"
             :placeholder="translatedWords.search + '...'"
@@ -112,13 +79,13 @@
         </div>
 
         <div
-          v-if="search.searchResults.length === 0 && search.searchQuery !== ''"
-          class="text-center"
+          v-if="search.results.length === 0 && search.searchQuery !== ''"
+          class="text-center text-gray-800 dark:text-gray-100 pt-2"
         >
           {{ translatedWords.nothingFoundMessage }}
         </div>
 
-        <search-dropdown :searchResults="search.searchResults" v-if="search.searchResultsLoaded">
+        <search-dropdown :searchResults="search.results" v-if="!search.isLoading">
           <template #load-button>
             <button @click="loadMore()" class="w-full py-3 hover:text-green-400">
               {{ `${translatedWords.loadMoreMessage} (${search.remainingResults})` }}

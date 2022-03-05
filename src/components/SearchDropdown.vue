@@ -35,7 +35,7 @@
             class="rounded-sm bg-green-400 dark:bg-green-400 text-gray-500 dark:text-gray-800 p-1 text-xs"
             >{{ result.verse_id }}</span
           >
-          <span class="quran pt-1 text-2xl font-normal ml-3 block truncate">
+          <span class="quran pt-1 text-xl font-normal ml-3 block truncate">
             {{ result.text }}
           </span>
           <!-- <p>{{ result.translations[0].text }}</p> -->

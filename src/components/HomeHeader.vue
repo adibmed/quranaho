@@ -21,8 +21,8 @@
 
       onMounted(() => {
         window.addEventListener('keydown', (e) => {
-          e.preventDefault()
           if (e.keyCode == 75 && e.ctrlKey) {
+            e.preventDefault()
             if (search.showSearchModal) search.closeSearch()
             else openSearchModal()
           }
@@ -72,8 +72,13 @@
         <div :class="search.showSearchModal ? 'opacity-20' : 'opacity-100'">
           <div class="mt-1 relative rounded-md shadow-sm">
             <div
-              class="absolute inset-y-0 left-0 grid place-content-center pt-1 ml-3 rounded-full cursor-pointer text-gray-600"
+              class="absolute inset-y-0 left-0 flex items-center pt-1 ml-3 rounded-full cursor-pointer text-gray-600"
             >
+              <div class="pl-1 text-gray-50 flex items-center">
+                <kbd class="p-0.5 px-2 text-xs border rounded">K</kbd>
+                <span class="px-1"> + </span>
+                <kbd class="p-0.5 px-2 text-xs border rounded">Ctrl</kbd>
+              </div>
               <search-icon />
             </div>
             <input

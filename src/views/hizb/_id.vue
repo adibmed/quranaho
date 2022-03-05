@@ -19,7 +19,7 @@
       const route = useRoute()
       const router = useRouter()
 
-      const id = route.params.id
+      const id = Number(route.params.id)
       quran.fetchHizb(id)
 
       function changeChapter(chapterNumber: number) {
@@ -46,11 +46,10 @@
     <chapter-header v-on:changeChapter="changeChapter" v-on:changeHizb="changeHizb" />
     <div class="container mx-auto">
       <chapter-text
-        v-if="!quran.isLoading"
+        v-if="!quran.isLoadingHizb"
         :chapterNumber="quran.chapterNumber"
         :verses="quran.verses"
       />
-      <Loading v-else />
     </div>
   </div>
 </template>

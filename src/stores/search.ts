@@ -7,40 +7,67 @@ export const useSearchStore = defineStore({
   state: () => ({
     isLoading: false,
     showSearchModal: false,
-    searchResults: [],
+    results: [],
     searchQuery: '',
-    searchLoading: false,
-    searchError: null,
     remainingResults: 0,
-    totalPages: 0
+    totalPages: 0,
+    currentPage: 1
   }),
 
   actions: {
-    // search() {},
-    async submitQuery(query: string) {
+    /**
+     * Search for a query
+     *
+     * @param query
+     */
+    search(query: string) {
+      // this.setState()
+      this.searchQuery = query
+      this.submitQuery()
+    },
+
+    /**
+     * Submit the search query to the API
+     */
+    async submitQuery() {
+      this.isLoading = true
       await axios
         .get(
           `https://api.quran.com/api/v4/search?q=${this.searchQuery}&size=20&page=${this.currentPage}&language=en`
         )
         .then((response) => {
-          this.searchResults = this.searchResults.concat(response.data.search.results)
-          this.searchResultsLoaded = true
-          this.remainingResults = response.data.search.total_results - this.searchResults.length
+          // this.results = this.results.concat(response.data.search.results)
+          this.results = response.data.search.results
+          this.remainingResults = response.data.search.total_results - this.results.length
           this.totalPages = response.data.search.total_pages
         })
-    },
-    loadMore() {
-      // this.isInputActive = false
-      // await this.loadResults()
-      // this.currentPage++
+      this.isLoading = false
     },
 
+    /**
+     * Load more results
+     */
+    async loadMore() {
+      this.currentPage++
+      await this.submitQuery()
+    },
+
+    /**
+     * Toggle the search modal
+     */
     openSearch() {
       this.showSearchModal = true
     },
 
+    /**
+     * Close the search modal
+     */
     closeSearch() {
       this.showSearchModal = false
     }
   }
 })
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useSearchStore, import.meta.hot))
+}
