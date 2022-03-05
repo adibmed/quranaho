@@ -23,7 +23,6 @@
         return showChaptersDropdown.value || showHizbsDropdown.value || showRecitersDropdown.value
       })
 
-      console.log('🔥 ')
       quran.fetchAllChapters()
       quran.fetchReciters()
 

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import axios from 'axios'
 
