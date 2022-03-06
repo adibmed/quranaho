@@ -67,26 +67,28 @@
       <search-bar v-if="search.showSearchModal" />
     </transition>
 
+    <!-- <div class="pl-1 text-gray-50 flex items-center">Ctrl + K</div> -->
     <div class="sm:max-w-full md:max-w-xl lg:max-w-2xl mx-auto my-8">
       <div class="mt-1 relative mx-2 sm:mx-0">
         <div :class="search.showSearchModal ? 'opacity-20' : 'opacity-100'">
           <div class="mt-1 relative rounded-md shadow-sm">
             <div
-              class="absolute inset-y-0 left-0 flex items-center pt-1 ml-3 rounded-full cursor-pointer text-gray-600"
+              class="absolute inset-y-0 left-0 flex items-center font-black pl-4 rounded-full cursor-pointer text-gray-300 dark:text-gray-500"
             >
-              <div class="pl-1 text-gray-50 flex items-center">
-                <kbd class="p-0.5 px-2 text-xs border rounded">K</kbd>
-                <span class="px-1"> + </span>
-                <kbd class="p-0.5 px-2 text-xs border rounded">Ctrl</kbd>
-              </div>
-              <search-icon />
+              Ctrl + K
             </div>
             <input
+              readonly
               @focus="openSearchModal()"
               type="text"
-              class="block w-full text-md text-gray-900 dark:bg-gray-700 border border-gray-300 dark:border-gray-500 rounded-full shadow-sm pr-3 pl-10 py-3 focus:outline-none"
+              class="block w-full text-lg text-gray-900 dark:bg-gray-700 border border-gray-300 dark:border-gray-500 rounded-full shadow-sm pr-16 pl-10 py-3 focus:outline-none"
               :placeholder="searchTranslation + '...'"
             />
+            <div
+              class="absolute inset-y-0 right-4 grid place-content-center rounded-full cursor-pointer text-gray-400"
+            >
+              <search-icon />
+            </div>
           </div>
         </div>
       </div>

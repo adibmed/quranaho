@@ -66,7 +66,7 @@
         </div>
         <div class="my-1 relative rounded-md shadow-sm">
           <div
-            class="absolute inset-y-0 left-0 grid place-content-center pt-1 ml-3 rounded-full cursor-pointer text-gray-600"
+            class="absolute inset-y-0 left-0 grid place-content-center pt-1 ml-3 rounded-full cursor-pointer text-gray-400 dark:text-gray-500"
           >
             <search-icon />
           </div>
@@ -97,6 +97,8 @@
     <div
       @click.self="closeSearchModal()"
       class="fixed left-0 top-0 h-screen w-full backdrop-filter backdrop-blur-sm bg-black bg-opacity-20 overflow-hidden z-40"
-    ></div>
+    >
+      <button @click="closeSearchModal()" class="absolute left-0 pl-4 pt-4 text-gray-500">Esc</button>
+    </div>
   </div>
 </template>
