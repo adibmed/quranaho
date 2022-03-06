@@ -98,7 +98,9 @@
       @click.self="closeSearchModal()"
       class="fixed left-0 top-0 h-screen w-full backdrop-filter backdrop-blur-sm bg-black bg-opacity-20 overflow-hidden z-40"
     >
-      <button @click="closeSearchModal()" class="absolute left-0 pl-4 pt-4 text-gray-500">Esc</button>
+      <button @click="closeSearchModal()" class="absolute left-0 pl-4 pt-4 text-gray-500">
+        Esc
+      </button>
     </div>
   </div>
 </template>
