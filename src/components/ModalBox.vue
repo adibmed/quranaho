@@ -1,6 +1,6 @@
 <script lang="ts" setup>
   import { computed } from 'vue'
-  //   import { mdiClose } from '@mdi/js'
+  import CardComponent from '@/components/CardComponent.vue'
   import Overlay from '@/components/Overlay.vue'
 
   const props = defineProps({
@@ -46,7 +46,15 @@
 
 <template>
   <overlay v-show="value" @overlay-click="cancel">
-    <div class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50 bg-white border dark:border-gray-800">
+    <card-component
+      v-show="value"
+      :title="title"
+      class="shadow-lg w-full max-h-modal md:w-3/5 lg:w-2/5 z-50"
+      rounded="rounded-lg"
+      :header-icon="mdiClose"
+      modal
+      @header-icon-click="cancel"
+    >
       <div class="space-y-3">
         <h1 v-if="largeTitle" class="text-2xl">
           {{ largeTitle }}
@@ -54,10 +62,22 @@
         <slot />
       </div>
 
-      <div>
-        <!-- <button :label="buttonLabel" :color="button" @click="confirm" />
-        <button v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" /> -->
-      </div>
-    </div>
+      <divider />
+
+      <!-- <jb-buttons>
+        <jb-button
+          :label="buttonLabel"
+          :color="button"
+          @click="confirm"
+        />
+        <jb-button
+          v-if="hasCancel"
+          label="Cancel"
+          :color="button"
+          outline
+          @click="cancel"
+        />
+      </jb-buttons> -->
+    </card-component>
   </overlay>
 </template>
