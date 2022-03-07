@@ -12,6 +12,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "@mdi/js": "^6.5.95",
     "axios": "^0.21.1",
     "pinia": "^2.0.9",
     "vue": "^3.2.25",
