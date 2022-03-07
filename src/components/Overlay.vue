@@ -14,9 +14,7 @@
   const overlayClick = (event) => {
     emit('overlay-click', event)
   }
-
-  // const store = useStore()
-
+ 
   const overlayStyle = computed(() => "from-white via-gray-100 to-white")
 </script>
 

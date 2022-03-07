@@ -1,5 +1,7 @@
 <script lang="ts" setup>
   import { computed } from 'vue'
+  import { mdiCog } from '@mdi/js'
+  import Icon from '@/components/Icon.vue'
 
   const props = defineProps({
     title: {
@@ -45,7 +47,7 @@
     return base
   })
 
-  const computedHeaderIcon = computed(() => props.headerIcon ?? '')
+  const computedHeaderIcon = computed(() => props.headerIcon ?? mdiCog)
 
   const headerIconClick = () => {
     emit('header-icon-click')
@@ -69,6 +71,7 @@
       class="flex items-stretch border-b dark:border-gray-800"
     >
       <p class="flex items-center py-3 grow font-bold" :class="[icon ? 'px-4' : 'px-6']">
+        <icon v-if="icon" :path="icon" class="mr-3" />
         {{ title }}
       </p>
       <a
@@ -78,6 +81,7 @@
         aria-label="more options"
         @click.prevent="headerIconClick"
       >
+        <icon :path="computedHeaderIcon" />
       </a>
     </header>
     <div v-if="empty" class="text-center py-24 text-gray-500 dark:text-gray-400">

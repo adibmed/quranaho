@@ -3,7 +3,12 @@
     <div class="container mx-auto">
       <home-header />
       <gallery />
-      <modal-box v-model="isModalActive" title="Sample modal">
+      <modal-box
+        v-model="isModalDangerActive"
+        large-title="Please confirm"
+        button="danger"
+        has-cancel
+      >
         <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
         <p>This is sample modal</p>
       </modal-box>
@@ -16,5 +21,7 @@
   import HomeHeader from '@/components/HomeHeader.vue'
   import ModalBox from '@/components/ModalBox.vue'
 
-  const isModalActive = true
+  import { ref } from 'vue'
+
+  const isModalDangerActive = ref(true)
 </script>

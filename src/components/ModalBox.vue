@@ -2,6 +2,8 @@
   import { computed } from 'vue'
   import CardComponent from '@/components/CardComponent.vue'
   import Overlay from '@/components/Overlay.vue'
+  import QButton from './QButton.vue'
+  import Devider from './Devider.vue'
 
   const props = defineProps({
     title: {
@@ -62,7 +64,12 @@
         <slot />
       </div>
 
-      <divider />
+      <devider />
+
+      <div class="flex">
+        <q-button :label="buttonLabel" :color="button" @click="confirm" />
+        <q-button v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
+      </div>
 
       <!-- <jb-buttons>
         <jb-button
