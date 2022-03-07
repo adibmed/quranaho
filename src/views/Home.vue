@@ -3,18 +3,18 @@
     <div class="container mx-auto">
       <home-header />
       <gallery />
+      <modal-box v-model="isModalActive" title="Sample modal">
+        <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
+        <p>This is sample modal</p>
+      </modal-box>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import Gallery from "@/components/Gallery.vue";
-import HomeHeader from "@/components/HomeHeader.vue";
+<script lang="ts" setup>
+  import Gallery from '@/components/Gallery.vue'
+  import HomeHeader from '@/components/HomeHeader.vue'
+  import ModalBox from '@/components/ModalBox.vue'
 
-export default {
-  components: {
-    Gallery,
-    HomeHeader,
-  },
-};
+  const isModalActive = true
 </script>
