@@ -4,6 +4,8 @@
   import Overlay from '@/components/Overlay.vue'
   import QButton from './QButton.vue'
   import Devider from './Devider.vue'
+  import QButtons from './QButtons.vue'
+  import { mdiClose } from '@mdi/js'
 
   const props = defineProps({
     title: {
@@ -66,25 +68,10 @@
 
       <devider />
 
-      <div class="flex">
+      <q-buttons>
         <q-button :label="buttonLabel" :color="button" @click="confirm" />
         <q-button v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
-      </div>
-
-      <!-- <jb-buttons>
-        <jb-button
-          :label="buttonLabel"
-          :color="button"
-          @click="confirm"
-        />
-        <jb-button
-          v-if="hasCancel"
-          label="Cancel"
-          :color="button"
-          outline
-          @click="cancel"
-        />
-      </jb-buttons> -->
+      </q-buttons>
     </card-component>
   </overlay>
 </template>

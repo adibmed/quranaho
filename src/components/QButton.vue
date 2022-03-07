@@ -1,5 +1,6 @@
 <script lang="ts" setup>
   import { computed } from 'vue'
+  import { getButtonColor } from '@/colors.ts'
   import Icon from '@/components/Icon.vue'
 
   const props = defineProps({
@@ -82,7 +83,7 @@
       'rounded',
       props.active ? 'ring ring-black dark:ring-white' : 'ring-blue-700',
       props.small ? 'p-1' : 'p-2',
-    //   getButtonColor(props.color, props.outline, !props.disabled)
+      getButtonColor(props.color, props.outline, !props.disabled)
     ]
 
     if (props.disabled) {
