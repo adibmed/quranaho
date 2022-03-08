@@ -69,7 +69,7 @@
       <devider />
 
       <q-buttons>
-        <q-button :label="buttonLabel" small="true" :color="button" @click="confirm" />
+        <q-button :label="buttonLabel" small="false" :color="button" @click="confirm" />
         <q-button v-if="hasCancel" label="Cancel" :color="button" outline @click="cancel" />
       </q-buttons>
     </card-component>
