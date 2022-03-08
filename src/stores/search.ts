@@ -65,6 +65,8 @@ export const useSearchStore = defineStore({
      */
     closeSearch() {
       this.showSearchModal = false
+      this.$reset()
+      document.body.style.overflow = 'initial'
     }
   }
 })

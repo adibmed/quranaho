@@ -1,11 +1,14 @@
 <script lang="ts" setup>
   import { computed } from 'vue'
-  // import { useStore } from 'vuex'
 
-  defineProps({
+  const props = defineProps({
     zIndex: {
       type: String,
       default: 'z-50'
+    },
+    center: {
+      type: Boolean,
+      default: true
     }
   })
 
@@ -14,13 +17,19 @@
   const overlayClick = (event) => {
     emit('overlay-click', event)
   }
+
+  const overlayClass = computed(() => {
+    const classes = ['overflow-hidden', 'fixed', 'inset-0']
+    if (props.center) {
+      classes.push('flex items-center  justify-center flex-col')
+    }
+    classes.push(props.zIndex)
+    return classes.join(' ')
+  })
 </script>
 
 <template>
-  <div
-    class="flex items-center flex-col justify-center overflow-hidden fixed inset-0"
-    :class="zIndex"
-  >
+  <div :class="overlayClass">
     <transition
       enter-active-class="transition duration-150 ease-in"
       enter-from-class="opacity-0"

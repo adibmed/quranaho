@@ -4,6 +4,7 @@
   import { useSearchStore } from '../stores/search'
   import Icon from './Icon.vue'
   import { mdiMagnify } from '@mdi/js'
+  import Overlay from './Overlay.vue'
 
   const searchTranslation = 'بحث'
   const search = useSearchStore()
@@ -51,7 +52,9 @@
       </svg>
     </div>
     <transition name="slide-fade">
-      <search-bar v-if="search.showSearchModal" />
+      <overlay v-show="search.showSearchModal" :center="false" @overlay-click="search.closeSearch">
+        <search-bar v-if="search.showSearchModal" />
+      </overlay>
     </transition>
 
     <!-- <div class="pl-1 text-gray-50 flex items-center">Ctrl + K</div> -->
