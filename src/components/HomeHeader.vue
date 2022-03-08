@@ -1,8 +1,9 @@
 <script lang="ts" setup>
   import SearchBar from '@/components/SearchBar.vue'
-  import SearchIcon from './icons/SearchIcon.vue'
   import { onMounted } from 'vue'
   import { useSearchStore } from '../stores/search'
+  import Icon from './Icon.vue'
+  import { mdiMagnify } from '@mdi/js'
 
   const searchTranslation = 'بحث'
   const search = useSearchStore()
@@ -67,13 +68,13 @@
               readonly
               @focus="openSearchModal()"
               type="text"
-              class="block w-full text-lg text-gray-900 dark:bg-gray-700 border border-gray-300 dark:border-gray-500 rounded-full shadow-sm pr-16 pl-10 py-3 focus:outline-none"
+              class="block w-full text-lg text-gray-900 dark:bg-gray-700 border border-gray-300 dark:border-gray-500 rounded-full shadow-sm pr-12 pl-10 py-3 focus:outline-none"
               :placeholder="searchTranslation + '...'"
             />
             <div
               class="absolute inset-y-0 right-4 grid place-content-center rounded-full cursor-pointer text-gray-400"
             >
-              <search-icon />
+              <icon :path="mdiMagnify" :w="'h-12'" :h="'h-12'" :size="24" />
             </div>
           </div>
         </div>

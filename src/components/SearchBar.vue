@@ -1,8 +1,9 @@
 <script lang="ts" setup>
   import SearchDropdown from '@/components/SearchDropdown.vue'
-  import SearchIcon from '@/components/icons/SearchIcon.vue'
-  import CloseIcon from './icons/CloseIcon.vue'
+
   import { useSearchStore } from '../stores/search'
+  import Icon from './Icon.vue'
+  import { mdiMagnify, mdiCloseThick } from '@mdi/js'
 
   const search = useSearchStore()
   const translatedWords = {
@@ -39,17 +40,17 @@
       <div class="relative mx-2 sm:mx-0 z-50">
         <div class="w-full flex justify-center py-4">
           <button
-            class="bg-gray-500 bg-opacity-10 rounded-full text-gray-700 dark:text-gray-400"
+            class="bg-gray-500 bg-opacity-10 rounded-full h-12 w-12 text-gray-700 dark:text-gray-400"
             @click="closeSearchModal()"
           >
-            <close-icon />
+            <icon :path="mdiCloseThick" :w="'h-12'" :h="'h-12'" :size="24" />
           </button>
         </div>
         <div class="my-1 relative rounded-md shadow-sm">
           <div
             class="absolute inset-y-0 left-0 grid place-content-center pt-1 ml-3 rounded-full cursor-pointer text-gray-400 dark:text-gray-500"
           >
-            <search-icon />
+            <icon :path="mdiMagnify" :w="'h-12'" :h="'h-12'" :size="24" />
           </div>
           <input
             @input="onInput"
