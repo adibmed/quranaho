@@ -1,35 +1,20 @@
-<script lang="ts">
-  import VerseIcon from '@/components/icons/VerseIcon.vue'
-  import { defineComponent } from 'vue'
+<script lang="ts" setup>
   import { useQuranStore } from '@/stores/quran'
   import StartVerse from './StartVerse.vue'
 
-  export default defineComponent({
-    components: {
-      VerseIcon,
-      StartVerse
+  defineProps({
+    chapterNumber: {
+      type: Number,
+      default: 0
     },
-    props: {
-      chapterNumber: {
-        type: Number,
-        default: 0
-      },
-      verses: {
-        default: () => [],
-        type: Array
-      }
-    },
-
-    setup() {
-      const quran = useQuranStore()
-      const chapterTranslation = 'سورة'
-
-      return {
-        quran,
-        chapterTranslation
-      }
+    verses: {
+      default: () => [],
+      type: Array
     }
   })
+
+  const quran = useQuranStore()
+  const chapterTranslation = 'سورة'
 </script>
 
 <template>

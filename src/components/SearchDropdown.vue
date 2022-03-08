@@ -1,12 +1,8 @@
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      searchResults: {
-        type: Array,
-        required: true
-      }
+<script lang="ts" setup>
+  defineProps({
+    searchResults: {
+      type: Array,
+      required: true
     }
   })
 </script>

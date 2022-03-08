@@ -1,68 +1,51 @@
-<script lang="ts">
-  import { defineComponent, computed, ref } from 'vue'
+<script lang="ts" setup>
+  import { computed, ref } from 'vue'
   import { useQuranStore } from '@/stores/quran'
   import { useRouter } from 'vue-router'
 
-  export default defineComponent({
-    setup() {
-      const quran = useQuranStore()
-      const router = useRouter()
+  const quran = useQuranStore()
+  const router = useRouter()
 
-      const showRecitersDropdown = ref(false)
-      const showChaptersDropdown = ref(false)
-      const showHizbsDropdown = ref(false)
-      const translatedWords = {
-        chapters: 'جميع السور',
-        about: 'معلومات عنا',
-        title: 'القرآن الكريم',
-        hizb: 'حزب',
-        juz: 'جزء',
-        rub: 'ربع'
-      }
-      const isAnyMenuOpen = computed(() => {
-        return showChaptersDropdown.value || showHizbsDropdown.value || showRecitersDropdown.value
-      })
-
-      quran.fetchAllChapters()
-      quran.fetchReciters()
-
-      function changeReciter(reciterNumber: number) {
-        closeAllMenus()
-        quran.setReciter(reciterNumber)
-      }
-
-      function changeChapter(chapterNumber: number) {
-        closeAllMenus()
-        quran.fetchChapter(chapterNumber)
-        router.push({ name: 'Chapter', params: { id: chapterNumber } })
-      }
-
-      function changeHizb(hizbNumber: number) {
-        closeAllMenus()
-        quran.fetchHizb(hizbNumber)
-        router.push({ name: 'Hizb', params: { id: hizbNumber } })
-      }
-
-      function closeAllMenus() {
-        showChaptersDropdown.value = false
-        showHizbsDropdown.value = false
-        showRecitersDropdown.value = false
-      }
-
-      return {
-        quran,
-        changeReciter,
-        changeChapter,
-        changeHizb,
-        closeAllMenus,
-        showRecitersDropdown,
-        showChaptersDropdown,
-        showHizbsDropdown,
-        translatedWords,
-        isAnyMenuOpen
-      }
-    }
+  const showRecitersDropdown = ref(false)
+  const showChaptersDropdown = ref(false)
+  const showHizbsDropdown = ref(false)
+  const translatedWords = {
+    chapters: 'جميع السور',
+    about: 'معلومات عنا',
+    title: 'القرآن الكريم',
+    hizb: 'حزب',
+    juz: 'جزء',
+    rub: 'ربع'
+  }
+  const isAnyMenuOpen = computed(() => {
+    return showChaptersDropdown.value || showHizbsDropdown.value || showRecitersDropdown.value
   })
+
+  quran.fetchAllChapters()
+  quran.fetchReciters()
+
+  function changeReciter(reciterNumber: number) {
+    closeAllMenus()
+    quran.setReciter(reciterNumber)
+  }
+
+  function changeChapter(chapterNumber: number) {
+    closeAllMenus()
+    quran.fetchChapter(chapterNumber)
+    router.push({ name: 'Chapter', params: { id: chapterNumber } })
+  }
+
+  function changeHizb(hizbNumber: number) {
+    closeAllMenus()
+    quran.fetchHizb(hizbNumber)
+    router.push({ name: 'Hizb', params: { id: hizbNumber } })
+  }
+
+  function closeAllMenus() {
+    showChaptersDropdown.value = false
+    showHizbsDropdown.value = false
+    showRecitersDropdown.value = false
+  }
 </script>
 
 <template>

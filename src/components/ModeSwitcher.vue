@@ -1,25 +1,18 @@
-<script lang="ts">
-  import { defineComponent, ref } from 'vue'
-  export default defineComponent({
-    setup() {
-      const appTheme = ref('light' as string)
+<script lang="ts" setup>
+  import { ref } from 'vue'
 
-      function toggle() {
-        // switch modes
-        appTheme.value = appTheme.value === 'dark' ? 'light' : 'dark'
+  const appTheme = ref('light' as string)
 
-        // change class in html tag
-        document.documentElement.setAttribute('class', appTheme.value)
+  function toggle() {
+    // switch modes
+    appTheme.value = appTheme.value === 'dark' ? 'light' : 'dark'
 
-        // save mode in local storage
-        localStorage.setItem('mode', appTheme.value)
-      }
-      return {
-        appTheme,
-        toggle
-      }
-    }
-  })
+    // change class in html tag
+    document.documentElement.setAttribute('class', appTheme.value)
+
+    // save mode in local storage
+    localStorage.setItem('mode', appTheme.value)
+  }
 </script>
 
 <template>

@@ -1,36 +1,20 @@
-<script lang="ts">
+<script lang="ts" setup>
   import ModeSwitcher from '@/components/ModeSwitcher.vue'
-  import { defineComponent, ref } from 'vue'
+  import { ref } from 'vue'
   import NavBarItem from './NavBarItem.vue'
   import NavBarItemLabel from './NavBarItemLabel.vue'
   import NavBarMenuToggler from './NavBarMenuToggler.vue'
-  export default defineComponent({
-    components: {
-      ModeSwitcher,
-      NavBarItem,
-      NavBarItemLabel,
-      NavBarMenuToggler
-    },
 
-    setup() {
-      const isHidden = ref(true)
-      const translatedWords = {
-        chapters: 'جميع السور',
-        about: 'معلومات عنا',
-        title: 'القرآن الكريم'
-      }
+  const isHidden = ref(true)
+  const translatedWords = {
+    chapters: 'جميع السور',
+    about: 'معلومات عنا',
+    title: 'القرآن الكريم'
+  }
 
-      function toggle() {
-        isHidden.value = true
-      }
-
-      return {
-        isHidden,
-        translatedWords,
-        toggle
-      }
-    }
-  })
+  function toggle() {
+    isHidden.value = true
+  }
 </script>
 
 <template>

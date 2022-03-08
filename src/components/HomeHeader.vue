@@ -1,40 +1,26 @@
-<script lang="ts">
+<script lang="ts" setup>
   import SearchBar from '@/components/SearchBar.vue'
-  import { defineComponent, ref, onMounted } from '@vue/runtime-core'
   import SearchIcon from './icons/SearchIcon.vue'
+  import { onMounted } from 'vue'
   import { useSearchStore } from '../stores/search'
-  export default defineComponent({
-    components: {
-      SearchBar,
-      SearchIcon
-    },
 
-    setup() {
-      const searchTranslation = 'بحث'
-      const search = useSearchStore()
+  const searchTranslation = 'بحث'
+  const search = useSearchStore()
 
-      function openSearchModal() {
-        setTimeout(() => {
-          search.openSearch()
-        }, 100)
+  function openSearchModal() {
+    setTimeout(() => {
+      search.openSearch()
+    }, 100)
+  }
+
+  onMounted(() => {
+    window.addEventListener('keydown', (e) => {
+      if (e.keyCode == 75 && e.ctrlKey) {
+        e.preventDefault()
+        if (search.showSearchModal) search.closeSearch()
+        else openSearchModal()
       }
-
-      onMounted(() => {
-        window.addEventListener('keydown', (e) => {
-          if (e.keyCode == 75 && e.ctrlKey) {
-            e.preventDefault()
-            if (search.showSearchModal) search.closeSearch()
-            else openSearchModal()
-          }
-        })
-      })
-
-      return {
-        searchTranslation,
-        search,
-        openSearchModal
-      }
-    }
+    })
   })
 </script>
 

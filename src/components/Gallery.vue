@@ -1,22 +1,10 @@
-<script lang="ts">
+<script lang="ts" setup>
   import ChapterCard from './ChapterCard.vue'
-  import { defineComponent } from 'vue'
   import Loading from '@/components/Loading.vue'
   import { useQuranStore } from '@/stores/quran'
 
-  export default defineComponent({
-    components: {
-      ChapterCard,
-      Loading
-    },
-
-    setup() {
-      const quran = useQuranStore()
-      quran.fetchAllChapters()
-
-      return { quran }
-    }
-  })
+  const quran = useQuranStore()
+  quran.fetchAllChapters()
 </script>
 
 <template>

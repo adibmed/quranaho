@@ -1,51 +1,32 @@
-<script lang="ts">
+<script lang="ts" setup>
   import SearchDropdown from '@/components/SearchDropdown.vue'
   import SearchIcon from '@/components/icons/SearchIcon.vue'
-  import { defineComponent } from 'vue'
   import CloseIcon from './icons/CloseIcon.vue'
   import { useSearchStore } from '../stores/search'
 
-  export default defineComponent({
-    components: {
-      SearchDropdown,
-      SearchIcon,
-      CloseIcon
-    },
+  const search = useSearchStore()
+  const translatedWords = {
+    search: 'بحث',
+    loadMoreMessage: 'تحميل المزيد',
+    nothingFoundMessage: 'لم يتم العثور على أي نتائج'
+  }
 
-    setup() {
-      const search = useSearchStore()
-      const translatedWords = {
-        search: 'بحث',
-        loadMoreMessage: 'تحميل المزيد',
-        nothingFoundMessage: 'لم يتم العثور على أي نتائج'
-      }
+  function onInput(event: Event) {
+    // disable body scrolling when search is open
+    document.body.style.overflow = 'hidden'
+    const query = (event.target as HTMLInputElement).value
+    search.search(query)
+  }
 
-      function onInput(event: Event) {
-        // disable body scrolling when search is open
-        document.body.style.overflow = 'hidden'
-        const query = (event.target as HTMLInputElement).value
-        search.search(query)
-      }
+  function closeSearchModal(): void {
+    search.closeSearch()
+    search.$reset()
+    document.body.style.overflow = 'initial'
+  }
 
-      function closeSearchModal(): void {
-        search.closeSearch()
-        search.$reset()
-        document.body.style.overflow = 'initial'
-      }
-
-      function loadMore() {
-        search.loadMore()
-      }
-
-      return {
-        search,
-        closeSearchModal,
-        translatedWords,
-        loadMore,
-        onInput
-      }
-    }
-  })
+  function loadMore() {
+    search.loadMore()
+  }
 </script>
 
 <template>

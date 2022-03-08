@@ -1,27 +1,11 @@
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  import { useRouter } from 'vue-router'
-
-  export default defineComponent({
-    props: {
-      chapter: {
-        type: Object
-      }
-    },
-
-    setup(props) {
-      const router = useRouter()
-      const verse = 'آية'
-
-      function goToChapter() {
-        router.push({ name: 'Chapter', params: { id: props.chapter?.id } })
-      }
-      return {
-        verse,
-        goToChapter
-      }
+<script lang="ts" setup>
+  defineProps({
+    chapter: {
+      type: Object
     }
   })
+
+  const verse = 'آية'
 </script>
 
 <template>
