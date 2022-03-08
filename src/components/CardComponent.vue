@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-  import { computed } from 'vue'
   import { mdiCog } from '@mdi/js'
+  import { computed } from 'vue'
   import Icon from '@/components/Icon.vue'
 
   const props = defineProps({
@@ -31,12 +31,12 @@
 
   const is = computed(() => (props.form ? 'form' : 'div'))
 
-  const lightBorderStyle = computed(() => '')
+  const lightBorderStyle = 'border-gray-100'
 
   const componentClass = computed(() => {
     const base = [
       props.rounded,
-      lightBorderStyle.value,
+      lightBorderStyle,
       props.modal ? 'dark:bg-gray-900' : 'dark:bg-gray-900/70'
     ]
 
@@ -62,7 +62,7 @@
   <component
     :is="is"
     :class="componentClass"
-    class="bg-white border dark:border-gray-800"
+    class="bg-white border dark:border-gray-800 dark:text-gray-100"
     @submit="submit"
   >
     <header

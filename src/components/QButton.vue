@@ -77,7 +77,7 @@
       'whitespace-nowrap',
       'focus:outline-none',
       'transition-colors',
-      'focus:ring',
+      'focus:ring-0',
       'duration-150',
       'border',
       'rounded',

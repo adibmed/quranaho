@@ -3,17 +3,6 @@
     <div class="container mx-auto">
       <home-header />
       <gallery />
-      <modal-box
-        v-if="false"
-        v-model="isModalDangerActive"
-        large-title="تنويه"
-        button="danger"
-        has-cancel
-      >
-        <p>ما يلي هو نسخة تجريبية من</p>
-        <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-        <p>This is sample modal</p>
-      </modal-box>
 
       <modal-box v-model="isModalActive" title="Sample modal">
         <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
@@ -29,6 +18,6 @@
   import ModalBox from '@/components/ModalBox.vue'
 
   import { ref } from 'vue'
+
   const isModalActive = ref(true)
-  const isModalDangerActive = ref(true)
 </script>
