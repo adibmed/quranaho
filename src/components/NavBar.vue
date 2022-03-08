@@ -4,6 +4,8 @@
   import NavBarItem from './NavBarItem.vue'
   import NavBarItemLabel from './NavBarItemLabel.vue'
   import NavBarMenuToggler from './NavBarMenuToggler.vue'
+  import Icon from './Icon.vue'
+  import { mdiCoffee } from '@mdi/js'
 
   const isHidden = ref(true)
   const translatedWords = {
@@ -27,7 +29,7 @@
         <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
           <div class="flex-shrink-0 flex items-center">
             <div class="flex items-center">
-              <img class="block h-8 w-auto pl-4 sm:pl-0" src="../assets/logo.png" alt="Workflow" />
+              <img class="hidden sm:block h-8 sm:h-10 w-auto pl-4 sm:pl-0" src="../assets/logo.png" alt="quran-karem" />
               <router-link to="/">
                 <img src="@/assets/quran-karem.png" alt="quran-karem" class="h-10" />
               </router-link>
@@ -45,16 +47,17 @@
           </div>
         </div>
         <div
-          class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:pr-0"
+          class="absolute right-0 flex items-center justify-between pr-2 sm:static sm:inset-auto sm:pr-0"
         >
           <mode-switcher />
-          <a class="hidden sm:block" href="https://ko-fi.com/K3K690OEW" target="_blank"
-            ><img
-              height="40"
-              style="border: 0px; height: 32px; padding: 0px 10px"
-              src="https://cdn.ko-fi.com/cdn/kofi1.png?v=3"
-              alt="Buy Me a Coffee at ko-fi.com"
-          /></a>
+
+          <a
+            class="w-8 h-8 rounded-full mr-2 grid place-content-center text-gray-400 dark:text-gray-500 hover:text-green-500"
+            href="https://ko-fi.com/K3K690OEW"
+            target="_blank"
+          >
+            <icon :path="mdiCoffee" :w="'h-5'" :h="'h-5'" :size="24" />
+          </a>
         </div>
       </div>
     </div>

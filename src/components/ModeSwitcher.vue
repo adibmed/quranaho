@@ -6,8 +6,8 @@
   const appTheme = ref('light' as string)
 
   function toggle() {
-    document.documentElement.setAttribute('class', appTheme.value)
     appTheme.value = appTheme.value === 'dark' ? 'light' : 'dark'
+    document.documentElement.setAttribute('class', appTheme.value)
     localStorage.setItem('mode', appTheme.value)
   }
 </script>
@@ -15,7 +15,7 @@
 <template>
   <button
     @click="toggle"
-    class="w-8 h-8 rounded-full grid place-content-center text-gray-500 hover:text-green-500"
+    class="w-8 h-8 rounded-full grid place-content-center text-gray-400 dark:text-gray-500 hover:text-green-500"
   >
     <icon
       v-if="appTheme === 'dark'"
