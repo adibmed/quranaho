@@ -29,7 +29,7 @@
 </script>
 
 <template>
-  <div :class="overlayClass">
+  <div :class="overlayClass" @keydown.esc="overlayClick">
     <transition
       enter-active-class="transition duration-150 ease-in"
       enter-from-class="opacity-0"
